@@ -13,7 +13,7 @@ import com.jardim.repositories.CategoriaRepository;
 import com.jardim.repositories.ProdutoRepository;
 
 @SpringBootApplication
-public class CursoApplication implements CommandLineRunner{
+public class CursoApplication implements CommandLineRunner{ //interface que permite executar códigos ao rodar esta classe
 
 	@Autowired
 	private CategoriaRepository categoriaRepo;
@@ -23,7 +23,7 @@ public class CursoApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(CursoApplication.class, args);
 	}
-
+	//método que roda ao iniciar essa classe
 	@Override
 	public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null, "Informática");
