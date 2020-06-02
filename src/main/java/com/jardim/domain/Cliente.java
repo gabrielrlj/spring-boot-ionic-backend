@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.jardim.domain.enums.TipoCliente;
 
 @Entity
@@ -31,6 +32,7 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	@OneToMany(mappedBy = "cliente")
+	@JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<>();
 	// 1.como a classe telefone eh mt simples, decidi utilizar um set de strings para
 	//   compô-la no cliente
