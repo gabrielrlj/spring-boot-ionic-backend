@@ -34,12 +34,15 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "cliente")
 	@JsonManagedReference
 	private List<Endereco> enderecos = new ArrayList<>();
-	// 1.como a classe telefone eh mt simples, decidi utilizar um set de strings para
-	//   compô-la no cliente
+	// 1.como a classe telefone eh mt simples, decidi utilizar um set de strings
+	// para
+	// compô-la no cliente
 	// 2.anotações para criar a tabela auxiliar no banco para guardar os telefones
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefones = new HashSet<>();
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 
@@ -110,6 +113,14 @@ public class Cliente implements Serializable {
 		this.telefones = telefones;
 	}
 
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -134,6 +145,5 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }
