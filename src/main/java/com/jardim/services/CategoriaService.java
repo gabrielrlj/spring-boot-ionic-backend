@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.jardim.domain.Categoria;
+import com.jardim.dto.CategoriaDTO;
 import com.jardim.repositories.CategoriaRepository;
 import com.jardim.services.exceptions.DataIntegrityException;
 import com.jardim.services.exceptions.ObjectNotFoundException;
@@ -57,5 +58,10 @@ public class CategoriaService {
 		//objeto que prepara minhas informações para que eu faça a consulta que me retorna a pagina de dados
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	//méotodo auxiliar que instancia uma categoria a partir de um dto
+	public Categoria fromDto(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 }
