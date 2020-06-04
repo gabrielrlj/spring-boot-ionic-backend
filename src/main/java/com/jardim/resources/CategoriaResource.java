@@ -1,6 +1,8 @@
 package com.jardim.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jardim.domain.Categoria;
+import com.jardim.dto.CategoriaDTO;
 import com.jardim.services.CategoriaService;
 
 @RestController
@@ -29,6 +32,14 @@ public class CategoriaResource {
 		Categoria obj = service.buscarPorId(id);
 		
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<CategoriaDTO>> listar() {
+		List<Categoria> list = service.buscar();
+		//percorrendo a lista de categorias e transpondo-a para uma lista de categoriasdto
+		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 	@PostMapping
