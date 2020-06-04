@@ -2,6 +2,7 @@ package com.jardim.resources.exceptions;
 
 import java.io.Serializable;
 
+//CLASSE PARA CRIAR OBJETO DE ERRO PERSONALIZADO
 public class StandardError implements Serializable{
 	/**
 	 * 
