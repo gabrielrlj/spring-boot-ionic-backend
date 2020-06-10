@@ -65,23 +65,45 @@ public class CursoApplication implements CommandLineRunner { // interface que pe
 		Categoria cat2 = new Categoria(null, "Escritório");
 		Categoria cat3 = new Categoria(null, "Cama mesa e banho");
 		Categoria cat4 = new Categoria(null, "Lazer");
-		Categoria cat5 = new Categoria(null, "Camping");
-		Categoria cat6 = new Categoria(null, "Eletronicos");
+		Categoria cat5 = new Categoria(null, "Livros");
+		Categoria cat6 = new Categoria(null, "Eletrodomesticos");
 		
 		
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 30.00);
+		Produto p4 = new Produto(null, "Shampoo", 12.00);
+		Produto p5 = new Produto(null, "Mesa", 250.00);
+		Produto p6 = new Produto(null, "Lampada de Escritorio", 45.00);
+		Produto p7 = new Produto(null, "It Stephen King", 49.90);
+		Produto p8 = new Produto(null, "Jogo", 200.00);
+		Produto p9 = new Produto(null, "TV", 2500.00);
+		Produto p10 = new Produto(null, "Geladeira", 1000.00);
+		Produto p11 = new Produto(null, "IoIo", 15.00);
+		
 
-		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3, p8, p9));
+		cat2.getProdutos().addAll(Arrays.asList(p2, p3, p5, p6));
+		cat3.getProdutos().addAll(Arrays.asList(p5, p4));
+		cat4.getProdutos().addAll(Arrays.asList(p8, p9, p11));
+		cat5.getProdutos().addAll(Arrays.asList(p7));
+		cat6.getProdutos().addAll(Arrays.asList(p10));
 
 		p1.getCategorias().addAll(Arrays.asList(cat1));
 		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		p3.getCategorias().addAll(Arrays.asList(cat1));
+		p3.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		p4.getCategorias().addAll(Arrays.asList(cat3));
+		p5.getCategorias().addAll(Arrays.asList(cat2, cat3));
+		p6.getCategorias().addAll(Arrays.asList(cat2));
+		p7.getCategorias().addAll(Arrays.asList(cat5));
+		p8.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		p9.getCategorias().addAll(Arrays.asList(cat1, cat4));
+		p10.getCategorias().addAll(Arrays.asList(cat6));
+		p11.getCategorias().addAll(Arrays.asList(cat4));
+
 
 		categoriaRepo.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6));
-		produtoRepo.saveAll(Arrays.asList(p1, p2, p3));
+		produtoRepo.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 
 		Estado est1 = new Estado(null, "Minas Gerais");
 		Estado est2 = new Estado(null, "São Paulo");
