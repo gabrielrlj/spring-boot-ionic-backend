@@ -20,6 +20,7 @@ import com.jardim.domain.PagamentoComCartao;
 import com.jardim.domain.Pedido;
 import com.jardim.domain.Produto;
 import com.jardim.domain.enums.EstadoPagamento;
+import com.jardim.domain.enums.Perfil;
 import com.jardim.domain.enums.TipoCliente;
 import com.jardim.repositories.CategoriaRepository;
 import com.jardim.repositories.CidadeRepository;
@@ -113,14 +114,21 @@ public class DBService {
 		Cliente cli1 = new Cliente(null, "João da Silva", "gabriellacerdajardim@gmail.com", "12345678910",
 				TipoCliente.PESSOAFISICA, pe.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("998858654", "985654854"));
-
+		
+		Cliente cli2 = new Cliente(null, "Maicon Kuster", "gabrieljardim@unisantos.com", "37775554010",
+				TipoCliente.PESSOAFISICA, pe.encode("123"));
+		cli2.getTelefones().addAll(Arrays.asList("989785676"));
+		cli2.addPerfil(Perfil.ADMIN);
+		
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto.303", "Jardim", "11350875", cli1, cid1);
 		Endereco e2 = new Endereco(null, "Avenida Matos", "124", "Frente", "Centro", "11860883", cli1, cid2);
+		Endereco e3 = new Endereco(null, "Rua Paulo Monteiro", "56", "Apto 4", "Vale Do Ribeira", "1345069", cli2, cid2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
-
-		clienteRepo.saveAll(Arrays.asList(cli1));
-		enderecoRepo.saveAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
+		
+		clienteRepo.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepo.saveAll(Arrays.asList(e1, e2, e3));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Pedido ped1 = new Pedido(null, sdf.parse("30/01/2020 10:43"), cli1, e1);
