@@ -16,11 +16,14 @@ import org.springframework.stereotype.Service;
 import com.jardim.domain.Cidade;
 import com.jardim.domain.Cliente;
 import com.jardim.domain.Endereco;
+import com.jardim.domain.enums.Perfil;
 import com.jardim.domain.enums.TipoCliente;
 import com.jardim.dto.ClienteDTO;
 import com.jardim.dto.NewClienteDTO;
 import com.jardim.repositories.ClienteRepository;
 import com.jardim.repositories.EnderecoRepository;
+import com.jardim.security.UserSS;
+import com.jardim.services.exceptions.AuthorizationException;
 import com.jardim.services.exceptions.DataIntegrityException;
 import com.jardim.services.exceptions.ObjectNotFoundException;
 
@@ -36,6 +39,12 @@ public class ClienteService {
 	private BCryptPasswordEncoder pe;
 	
 	public Cliente buscarPorId(Integer id) {
+		
+		UserSS user	= UserService.authenticated();
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
