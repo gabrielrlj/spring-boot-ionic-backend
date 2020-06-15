@@ -1,5 +1,6 @@
 package com.jardim.services;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jardim.domain.Cidade;
 import com.jardim.domain.Cliente;
@@ -37,6 +39,9 @@ public class ClienteService {
 	
 	@Autowired
 	private BCryptPasswordEncoder pe;
+	
+	@Autowired
+	private S3Service s3;
 	
 	public Cliente buscarPorId(Integer id) {
 		
@@ -119,5 +124,9 @@ public class ClienteService {
 	
 	public Cliente fromDto(ClienteDTO objDto) {
 		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
+	}
+	
+	public URI uploadProfilePicture(MultipartFile mpf) {
+		return s3.uploadFile(mpf);
 	}
 }
